@@ -1906,7 +1906,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9166858, y: 1.8109179, z: 0.9962046}
   m_Center: {x: 0.04165709, y: 0.87099123, z: 0.11332524}
---- !u!1001 &1210639893
+--- !u!1001 &168916820
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2102,7 +2102,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b119de99879f03041aacb1f706f56996, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1418857874
+--- !u!1001 &172019626
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2520,34 +2520,11 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &1590346277
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 76e4e50ab0788a64f95b653fd9ff10b5, type: 3}
+--- !u!4 &238756697 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 07e446560dc44e541baace5cb250c866, type: 3}
   m_PrefabInternal: {fileID: 1236338342}
@@ -16453,7 +16430,7 @@ Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1590346272}
+  m_GameObject: {CamerfileID: 1590346272}
   m_LocalRotation: {x: 0.077308126, y: 0.4599915, z: -0.04024406, w: 0.8836355}
   m_LocalPosition: {x: -12.58, y: 20, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
