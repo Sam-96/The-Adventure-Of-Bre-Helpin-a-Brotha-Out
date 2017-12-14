@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -111,6 +112,11 @@ public class PlayerController : MonoBehaviour
 		{
 			other.gameObject.SetActive (false);
 			gemCount++;
+		}
+
+		if (other.gameObject.CompareTag ("Portal1"))
+		{
+			SceneManager.LoadScene ("Level 2 Instructions");
 		}
 	}
 
