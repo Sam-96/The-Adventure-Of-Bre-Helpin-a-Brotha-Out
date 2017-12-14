@@ -31,7 +31,7 @@ public class EndDoor: MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if (gemsCollected == 1) {
+		if (gemsCollected == 10) {
 			movingBlock.position = Vector3.Lerp (movingBlock.position, position1.position, smooth * Time.deltaTime);
 		}
 	}
