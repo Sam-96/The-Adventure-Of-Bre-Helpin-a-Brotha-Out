@@ -1,48 +1,98 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
-
 
 public class PlayerController : MonoBehaviour
 {
 	private int gemCount = 0;
 	private Animator anim;
-	public float speed = 0.5f;
-	public int forceConst = 5;
-	public float distToGround;
-	private bool canJump;
-	public bool IsGrounded;
-	private Rigidbody selfRigidbody;
 
-	// Use this for initialization
+	[System.Serializable]
+	public class MoveSettings
+	{
+
+		public float forwardVel = 12;
+		public float rotateVel = 100;
+		public float jumpVel = 25;
+		public float distToGrounded = 0.1f;
+		public LayerMask ground;
+	}
+
+	[System.Serializable]
+	public class PhysSettings
+	{
+		public float downAccel = 0.75f;
+	}
+
+	[System.Serializable]
+	public class InputSettings
+	{
+		public float inputDelay = 0.1f;
+		public string FORWARD_AXIS = "Vertical";
+		public string TURN_AXIS = "Horizontal";
+		public string JUMP_AXIS = "Jump";
+
+	}
+
+	public MoveSettings moveSetting = new MoveSettings();
+	public PhysSettings physSetting = new PhysSettings();
+	public InputSettings inputSetting = new InputSettings();
+
+	Vector3 velocity = Vector3.zero;
+	Quaternion targetRotation;
+	Rigidbody rBody;
+	float forwardInput, turnInput, jumpInput;
+
+	public Quaternion TargetRotation
+	{
+		get { return targetRotation; }
+	}
+
+	bool Grounded()
+	{
+		return Physics.Raycast(transform.position, Vector3.down, moveSetting.distToGrounded, moveSetting.ground);
+	}
+
 	void Start()
 	{
 		anim = GetComponent<Animator>();
-		selfRigidbody = GetComponent<Rigidbody>();
+
+		targetRotation = transform.rotation;
+		if (GetComponent<Rigidbody>())
+			rBody = GetComponent<Rigidbody>();
+		else
+			Debug.LogError("The character needs a rigidbody");
+
+		forwardInput = turnInput = jumpInput = 0;
+
 
 	}
 
-	void OnCollisionStay(Collision collisionInfo)
+	void GetInput()
 	{
-		IsGrounded = true;
+		forwardInput = Input.GetAxis(inputSetting.FORWARD_AXIS);
+		turnInput = Input.GetAxis(inputSetting.TURN_AXIS);
+		jumpInput = Input.GetAxisRaw(inputSetting.JUMP_AXIS);
+		if (jumpInput > 0)
+		{
+			Debug.Log(jumpInput);
+		}
 	}
 
-	void OnCollisionExit(Collision collisionInfo)
+	void Update()
 	{
-		IsGrounded = false;
+		GetInput();
 	}
 
 	void FixedUpdate()
 	{
-		if (canJump)
-		{
-			canJump = false;
-			selfRigidbody.AddForce(0, forceConst, 0, ForceMode.Impulse);
-		}
+		Run();
+		Jump();
+		Turn();
+		rBody.velocity = transform.TransformDirection(velocity);
 
 		//Character Walk
-		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
 		{
 			anim.SetBool("Sprint", true);
 			anim.SetBool("Idle", false);
@@ -53,58 +103,43 @@ public class PlayerController : MonoBehaviour
 		{
 			anim.SetBool("Idle", true);
 			anim.SetBool("Sprint", false);
-		}
 
-		if (Input.GetKey(KeyCode.UpArrow))
-		{
-			transform.position += Vector3.forward * Time.deltaTime * speed;
-			transform.rotation = Quaternion.Euler(0, 0, 0);
-		}
-
-		if (Input.GetKey(KeyCode.DownArrow))
-		{
-			transform.position -= Vector3.forward * Time.deltaTime * speed;
-			transform.rotation = Quaternion.Euler(0, 180, 0);
-		}
-
-		if (Input.GetKey(KeyCode.RightArrow))
-		{
-			transform.position -= Vector3.left * Time.deltaTime * speed;
-			transform.rotation = Quaternion.Euler(0, 90, 0);
-		}
-
-		if ((Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow)) || (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.DownArrow)))
-		{
-			anim.SetBool("Idle", true);
-			anim.SetBool("Sprint", false);
-		}
-
-		if (Input.GetKey(KeyCode.LeftArrow))
-		{
-			transform.position += Vector3.left * Time.deltaTime * speed;
-			transform.rotation = Quaternion.Euler(0, 270, 0);
-		}
-
-		if (Input.GetKeyDown(KeyCode.K))
-		{
-			anim.SetBool("Kick", true);
-			anim.SetBool("Idle", false);
-		}
-		if (Input.GetKeyUp(KeyCode.K))
-		{
-			anim.SetBool("Kick", false);
-			anim.SetBool("Idle", true);
 		}
 	}
 
-	// Update is called once per frame
-	void Update()
+	void Run()
 	{
-		if (Input.GetKey(KeyCode.Space) && (IsGrounded == true))
+		if (Mathf.Abs(forwardInput) > inputSetting.inputDelay)
 		{
-			canJump = true;
+			velocity.z = moveSetting.forwardVel * forwardInput;
 		}
+		else
+			velocity.z = 0;
+	}
 
+	void Turn()
+	{
+		if(Mathf.Abs(turnInput) > inputSetting.inputDelay)
+		{
+			targetRotation *= Quaternion.AngleAxis(moveSetting.rotateVel * turnInput * Time.deltaTime, Vector3.up);
+		}
+		transform.rotation = targetRotation;
+	}
+
+	void Jump()
+	{
+		if (jumpInput > 0 && Grounded())
+		{
+			velocity.y = moveSetting.jumpVel;
+		}
+		else if (jumpInput ==0 && Grounded())
+		{
+			velocity.y = 0;
+		}
+		else
+		{
+			velocity.y -= physSetting.downAccel;
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -125,5 +160,4 @@ public class PlayerController : MonoBehaviour
 	{
 		return gemCount;
 	}
-
 }
