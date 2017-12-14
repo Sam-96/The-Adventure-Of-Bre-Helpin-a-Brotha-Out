@@ -114,4 +114,8 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	public int getGems(){
+		return gemCount;
+	}
+
 }
