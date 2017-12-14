@@ -154,6 +154,10 @@ public class PlayerController : MonoBehaviour
 		{
 			SceneManager.LoadScene("Level 2 Instructions");
 		}
+		if (other.gameObject.CompareTag ("End"))
+		{
+			SceneManager.LoadScene ("Win");
+		}
 	}
 
 	public int getGems()
