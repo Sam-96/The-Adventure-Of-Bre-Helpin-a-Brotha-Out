@@ -6663,6 +6663,10 @@ Prefab:
       propertyPath: m_Constraints
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 1901391827054462, guid: b119de99879f03041aacb1f706f56996, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b119de99879f03041aacb1f706f56996, type: 2}
   m_IsPrefabParent: 0
