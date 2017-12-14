@@ -14521,6 +14521,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1901391827054462, guid: b119de99879f03041aacb1f706f56996,
     type: 2}
   m_PrefabInternal: {fileID: 1406078477}
+--- !u!4 &1199593117 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4660014611629116, guid: b119de99879f03041aacb1f706f56996,
+    type: 2}
+  m_PrefabInternal: {fileID: 1406078477}
 --- !u!65 &1199593118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19423,6 +19428,7 @@ GameObject:
   - component: {fileID: 1590346275}
   - component: {fileID: 1590346274}
   - component: {fileID: 1590346273}
+  - component: {fileID: 1590346278}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -19499,6 +19505,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 10, y: 55, z: 0}
+--- !u!114 &1590346278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590346272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0370d9644a19f4061abef37455975831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1199593117}
+  offsetPosition: {x: 1, y: 2, z: -3}
+  offsetPositionSpace: 1
+  lookAt: 1
 --- !u!1001 &1591054150
 Prefab:
   m_ObjectHideFlags: 0
