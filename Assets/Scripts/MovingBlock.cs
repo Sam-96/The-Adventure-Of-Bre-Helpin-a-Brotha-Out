@@ -23,13 +23,14 @@ public class MovingBlock : MonoBehaviour {
 	void Start () {
 		ChangeTarget ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-	void fixedUpdate () {
+	void FixedUpdate () {
+		Debug.Log ("Moving block's curr pos: " + movingBlock.position.ToString());
 		movingBlock.position = Vector3.Lerp (movingBlock.position, newPosition, smooth * Time.deltaTime);
 	}
 

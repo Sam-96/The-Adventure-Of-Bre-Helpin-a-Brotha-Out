@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private bool canJump;
     public bool IsGrounded;
     private Rigidbody selfRigidbody;
+	private int gemCount = 0;
 
     // Use this for initialization
     void Start()
@@ -103,5 +104,14 @@ public class PlayerController : MonoBehaviour
         }
       
     }
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag ("Collectable"))
+		{
+			other.gameObject.SetActive (false);
+			gemCount++;
+		}
+	}
 
 }
