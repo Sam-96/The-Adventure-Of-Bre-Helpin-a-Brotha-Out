@@ -3801,6 +3801,7 @@ GameObject:
   - component: {fileID: 1526205435}
   - component: {fileID: 1526205434}
   - component: {fileID: 1526205433}
+  - component: {fileID: 1526205438}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3877,6 +3878,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 7.58, y: 180, z: 0}
+--- !u!114 &1526205438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1526205432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0370d9644a19f4061abef37455975831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1716832376}
+  offsetPosition: {x: 1, y: 2, z: -3}
+  offsetPositionSpace: 1
+  lookAt: 1
 --- !u!1 &1535807592
 GameObject:
   m_ObjectHideFlags: 0
@@ -4553,6 +4569,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b119de99879f03041aacb1f706f56996, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1716832376 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4660014611629116, guid: b119de99879f03041aacb1f706f56996,
+    type: 2}
+  m_PrefabInternal: {fileID: 1716832375}
 --- !u!1001 &1747514028
 Prefab:
   m_ObjectHideFlags: 0
