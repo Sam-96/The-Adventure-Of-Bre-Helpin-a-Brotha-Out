@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour
 			Debug.LogError("The character needs a rigidbody");
 
 		forwardInput = turnInput = jumpInput = 0;
-
+			
+		gemCount = 0;
 
 	}
 
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
 		rBody.velocity = transform.TransformDirection(velocity);
 
 		//Character Walk
-		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) )
 		{
 			anim.SetBool("Sprint", true);
 			anim.SetBool("Idle", false);
